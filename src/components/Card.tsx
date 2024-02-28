@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Character } from "../types";
 import Flex from "./Flex";
+import ErrorCard from "./ErrorCard";
 
 const StyledCard = styled.div`
   padding: 10px;
@@ -34,10 +35,11 @@ const StyledSpan = styled.span`
   color: #4595009d;
 `;
 
+
 const Card = ({ data }: { data: Character[] }) => {
   const renderItems = (arr: Character[]) => {
     if (!arr || arr.length === 0) {
-      return null;
+      return <ErrorCard>characters not found</ErrorCard>;
     }
     return arr.map(({ id, name, gender, species, type, status, image }) => {
       if (type === "") {
