@@ -5,13 +5,14 @@ import Flex from "./Flex";
 import HeaderImg from "./HeaderImg";
 import Card from "./Card";
 import { useState, useEffect } from "react";
-import { getCharacters } from "rickmortyapi";
-
-import { Character, FormData } from "../types";
+import { getCharacters, getCharacter } from "rickmortyapi";
+import { Character } from "rickmortyapi";
+import { FormData } from "../types";
 import LoadButton from "./LoadButton";
 import Spinner from "./Spinner";
 import Form from "./Form";
 import ErrorCard from "./ErrorCard";
+import Popup from "./Popup";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -25,6 +26,10 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filterData, setFilterData] = useState<FormData | null>(null);
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null
+  );
 
   useEffect(() => {
     loadMoreCharacters();
@@ -67,6 +72,13 @@ const App = () => {
     }
   };
 
+  const handleCardClick = async (id: number) => {
+    const res = await getCharacter(id);
+    const selectedCharacter = res.data;
+    setSelectedCharacter(selectedCharacter);
+    setShowPopup(true);
+  };
+
   return (
     <>
       <StyledContainer>
@@ -79,7 +91,17 @@ const App = () => {
         <Form onSubmit={handleFilter}></Form>
         <Flex justify="center" align="center" wrap="wrap" gap="20px">
           {loading && <Spinner></Spinner>}
-          <Card data={characters} />
+          {characters ? (
+            characters.map((character) => (
+              <Card
+                key={character.id}
+                cardData={character}
+                onCardClick={(id) => handleCardClick(id)}
+              />
+            ))
+          ) : (
+            <ErrorCard>characters not found</ErrorCard>
+          )}
         </Flex>
         {hasNextPage ? (
           <LoadButton onLoadMore={loadMoreCharacters}></LoadButton>
@@ -89,6 +111,12 @@ const App = () => {
           </Flex>
         )}
       </StyledContainer>
+      {showPopup && (
+        <Popup
+          popupData={selectedCharacter}
+          handleCloseButton={() => setShowPopup(false)}
+        />
+      )}
     </>
   );
 };

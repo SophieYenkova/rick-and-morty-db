@@ -1,13 +1,34 @@
 import styled from "styled-components";
-import { Character } from "rickmortyapi";
 import Flex from "./Flex";
+import { Character } from "rickmortyapi";
+
+const StyledBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledCloseButton = styled.button`
+  min-width: 10vw;
+  min-height: 5vh;
+  background-color: #88e23b;
+  border-radius: 10px;
+  font-size: 20px;
+`;
 
 const StyledCard = styled.div`
   padding: 10px;
   min-width: 25vw;
   max-width: 170px;
   min-height: 30vh;
-  background-color: #ffffff5b;
+  background-color: #ebe480;
   border-radius: 8px;
   box-shadow: 4px 4px 56px -33px rgba(4, 60, 110, 0.2);
 `;
@@ -34,13 +55,22 @@ const StyledSpan = styled.span`
   color: #4595009d;
 `;
 
+interface PopupProps {
+    popupData: Character | null;
+    handleCloseButton: () => void; 
+  }
 
-const Card = ({ cardData, onCardClick }: { cardData: Character, onCardClick: (character: Character['id']) => void }) => {
-  const { id, name, gender, species, type, status, image } = cardData;
-  const hasType =  type ? type : 'no';
-
-      return (
-        <StyledCard key={id} onClick={() => onCardClick(id)}>
+const Popup = ({ popupData, handleCloseButton }: PopupProps) => {
+if(!popupData) {
+    return;
+}
+  const { id, name, gender, species, type, status, image, location, origin } =
+    popupData;
+  const hasType = type ? type : "no";
+  return (
+    <Flex justify="center" align="center" wrap="wrap" gap="20px">
+      <StyledBackground>
+        <StyledCard key={id}>
           <StyledUl>
             <li>
               <StyledImg src={image} alt={name} />
@@ -60,13 +90,22 @@ const Card = ({ cardData, onCardClick }: { cardData: Character, onCardClick: (ch
                     <li>
                       <StyledSpan>Type: </StyledSpan> {hasType}
                     </li>
+                    <li>
+                      <StyledSpan>Location: </StyledSpan> {location.name}
+                    </li>
+                    <li>
+                      <StyledSpan>Origin: </StyledSpan> {origin.name}
+                    </li>
                   </StyledUl>
                 </Flex>
               </div>
             </li>
           </StyledUl>
+          <StyledCloseButton onClick={() => handleCloseButton()}>Close</StyledCloseButton>
         </StyledCard>
-      );
+      </StyledBackground>
+    </Flex>
+  );
 };
 
-export default Card;
+export default Popup;
