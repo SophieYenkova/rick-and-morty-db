@@ -18,13 +18,22 @@ const StyledUl = styled.ul`
   list-style-type: none;
 `;
 
+const StyledLi = styled.li`
+   @media screen and (max-width: 768px) {
+    font-size: 1em;
+  }
+`;
+
 const StyledLabel = styled.h3`
   font-weight: 700;
+  @media screen and (max-width: 768px) {
+    font-size: 1em;
+  }
 `;
 
 const StyledImg = styled.img`
-  max-width: 30vw;
-  max-height: 25vh;
+  max-width: 60%;
+  max-height: 60%;
   border-radius: 50%;
   margin: 5px;
   box-shadow: 0px 0px 27px 5px rgba(4, 60, 110, 0.2);
@@ -42,28 +51,28 @@ const Card = ({ cardData, onCardClick }: { cardData: Character, onCardClick: (ch
       return (
         <StyledCard key={id} onClick={() => onCardClick(id)}>
           <StyledUl>
-            <li>
+            <StyledLi>
               <StyledImg src={image} alt={name} />
               <div className="">
                 <StyledLabel>{name}</StyledLabel>
                 <Flex direction="column" justify="center">
                   <StyledUl>
-                    <li>
+                    <StyledLi>
                       <StyledSpan>Status:</StyledSpan> {status}
-                    </li>
-                    <li>
+                    </StyledLi>
+                    <StyledLi>
                       <StyledSpan>Gender:</StyledSpan> {gender}
-                    </li>
-                    <li>
+                    </StyledLi>
+                    <StyledLi>
                       <StyledSpan>Species:</StyledSpan> {species}
-                    </li>
-                    <li>
+                    </StyledLi>
+                    <StyledLi>
                       <StyledSpan>Type: </StyledSpan> {hasType}
-                    </li>
+                    </StyledLi>
                   </StyledUl>
                 </Flex>
               </div>
-            </li>
+            </StyledLi>
           </StyledUl>
         </StyledCard>
       );

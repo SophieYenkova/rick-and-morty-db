@@ -8,6 +8,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledButton = styled.button`
+  padding: 10px;
   min-width: 15vw;
   min-height: 5vh;
   background-color: #88e23b;

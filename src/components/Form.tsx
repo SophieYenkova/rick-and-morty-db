@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FormProps,FormData } from "../types";
+import { FormProps, FormData } from "../types";
 
 const StyledForm = styled.form`
   display: flex;
@@ -13,6 +13,11 @@ const StyledForm = styled.form`
   background-color: #ffffff5b;
   padding: 20px;
   border-radius: 10px;
+
+  @media screen and (max-width: 768px) {
+    max-width: 55%;
+  }
+
 `;
 
 const StyledInput = styled.input`
@@ -22,6 +27,9 @@ const StyledInput = styled.input`
   border: 1px solid #cccccc;
   background-color: #ffffff5b;
   border-radius: 5px;
+  @media screen and (max-width: 768px) {
+    font-size: 1em;
+  }
 `;
 
 const StyledSelect = styled.select`
@@ -31,21 +39,27 @@ const StyledSelect = styled.select`
   background-color: #ffffff5b;
   border: 1px solid #cccccc;
   border-radius: 5px;
+  @media screen and (max-width: 768px) {
+    font-size: 0.8em;
+  }
+
 `;
 
 const StyledButton = styled.button`
+  padding: 10px;
   align-self: center;
   min-width: 15vw;
   min-height: 5vh;
   background-color: #88e23b;
   border-radius: 10px;
   font-size: 20px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.8em;
+  }
 `;
 
-
-const Form = ({
-  onSubmit,
-}: FormProps) => {
+const Form = ({ onSubmit }: FormProps) => {
   const [formData, setFormData] = useState<FormData>({
     status: "",
     type: "",
@@ -53,7 +67,6 @@ const Form = ({
     species: "",
     name: "",
   });
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

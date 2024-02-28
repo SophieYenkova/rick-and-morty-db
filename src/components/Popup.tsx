@@ -21,6 +21,10 @@ const StyledCloseButton = styled.button`
   background-color: #88e23b;
   border-radius: 10px;
   font-size: 20px;
+  padding: 10px;
+  @media screen and (max-width: 768px) {
+    font-size: 1.2em;
+  }
 `;
 
 const StyledCard = styled.div`
@@ -31,6 +35,12 @@ const StyledCard = styled.div`
   background-color: #ebe480;
   border-radius: 8px;
   box-shadow: 4px 4px 56px -33px rgba(4, 60, 110, 0.2);
+  @media screen and (max-width: 768px) {
+    max-width: 60%;
+  }
+  @media screen and (min-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const StyledUl = styled.ul`
@@ -41,6 +51,9 @@ const StyledUl = styled.ul`
 
 const StyledLabel = styled.h3`
   font-weight: 700;
+  @media screen and (max-width: 768px) {
+    font-size: 1.3em;
+  }
 `;
 
 const StyledImg = styled.img`
@@ -49,6 +62,12 @@ const StyledImg = styled.img`
   border-radius: 50%;
   margin: 5px;
   box-shadow: 0px 0px 27px 5px rgba(4, 60, 110, 0.2);
+  @media screen and (max-width: 768px) {
+    max-width: 70%;
+  }
+  @media screen and (min-width: 768px) {
+    max-width: 75%;
+  }
 `;
 
 const StyledSpan = styled.span`

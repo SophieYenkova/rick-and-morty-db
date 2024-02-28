@@ -1,13 +1,12 @@
+import { useState, useEffect } from "react";
+import { getCharacters, getCharacter, Character } from "rickmortyapi";
 import styled from "styled-components";
-import Title from "./Title";
+import { FormData } from "../types";
+
 import Header from "./Header";
 import Flex from "./Flex";
 import HeaderImg from "./HeaderImg";
 import Card from "./Card";
-import { useState, useEffect } from "react";
-import { getCharacters, getCharacter } from "rickmortyapi";
-import { Character } from "rickmortyapi";
-import { FormData } from "../types";
 import LoadButton from "./LoadButton";
 import Spinner from "./Spinner";
 import Form from "./Form";
@@ -18,6 +17,19 @@ const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: #a6cccc;
+`;
+
+const StyledTitle = styled.h1`
+  font-size: 25px;
+  text-align: center;
+  color: #acf23c;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    font-size: 48px;
+  }
 `;
 
 const App = () => {
@@ -84,7 +96,7 @@ const App = () => {
       <StyledContainer>
         <Header>
           <Flex justify="center" align="center">
-            <Title>Rick and Morty DB</Title>
+            <StyledTitle>Rick and Morty DB</StyledTitle>
             <HeaderImg />
           </Flex>
         </Header>
